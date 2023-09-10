@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Domine&display=swap');
+
+.row {
+    --bs-gutter-x:0 !important; 
+}
+.BgColor{
+    background-color: #f5f7f9;
+}
+hr:hover + h1 .hovering , h1:hover .hovering {
+    color:rgb(25 118 210) !important ;
+    scale: 1.2;
+}
+
+.hovering{
+    display: inline-block;
+    
+    transition: all ease-in-out 0.1s  ;
+}
+
+.S4-hovering:hover h4{
+    color:rgb(25 118 210) !important ;
+    scale: 1.1;
+}
+
+.S4-hovering h4 {
+    transition: all ease-in-out 0.1s  ;
+}
+.Section3-container{
+    text-align: -webkit-center;
+}
+
+.Section3-container > hr{
+    width: 10%;
+    color:rgb(25 118 210) ;
+    opacity: 1;
+}
+.caption{
+    position: absolute;
+    margin-left: 10%;
+    width: 30%;
+}
+
+.caption h1{
+    font-family: 'Black Ops One', cursive;
+    font-size: 40px;
+}
+
+.caption p , .caption button{
+    font-family: 'Domine', serif;
+    font-size: 20px;
+}
+
+@media (min-width: 990px) and (max-width: 1150px) {
+    .lg-fix {
+        display: none !important;
+    }
+}
+
+.our-work .box {
+    padding: 5px;
+    overflow: hidden;
+    position: relative;
+  }
+  .our-work .box::before {
+    content: attr(data-work);
+    position: absolute;
+    background-color: rgb(25 118 210 / 76%);
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+    font-size: 1.5rem;
+    transform: translateX(calc(-100% - 5px));
+  }
+  .our-work .box:hover::before {
+    transform: translateX(0);
+  }
+
+
+  .trans{
+    transition: all fade in 1s;
+  }

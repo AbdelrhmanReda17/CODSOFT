@@ -1,0 +1,17 @@
+.product-links{
+    text-decoration: none !important;
+    color : black !important;
+    font-size: 15px !important;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.product-links:hover{
+    color : rgb(25 118 210) !important;
+}
+
+.product-footer{
+    font-size: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}

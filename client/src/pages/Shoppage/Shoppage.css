@@ -1,0 +1,24 @@
+.BgColor{
+    background-color: #f5f7f9;
+}
+.BgColor2{
+    background-color: white !important;
+}
+.centering {
+    text-align: -webkit-center;   
+}
+
+.dep-hover{
+    transition: all ease-out 0.2s;
+}
+.dep-hover:hover{
+    color: rgb(25 118 210) !important;
+}
+
+.slider-width{
+    width: 90% !important;
+}
+
+.Sizing{
+    font-size: 50px;
+}

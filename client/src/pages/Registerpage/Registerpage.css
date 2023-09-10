@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Domine&family=Oswald:wght@200;700&display=swap');
+
+
+.text{
+font-family: 'Oswald', sans-serif !important;
+    font-weight: bolder !important;
+}
+
+.text-2{
+    font-family: 'Oswald', sans-serif !important;
+    font-weight: 600 !important;
+}

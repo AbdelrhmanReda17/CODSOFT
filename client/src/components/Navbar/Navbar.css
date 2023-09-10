@@ -1,0 +1,7 @@
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show{
+    color : #0074d9 !important;
+}
+
+.text-coloring{
+    color : #8b8b8b !important;
+}
