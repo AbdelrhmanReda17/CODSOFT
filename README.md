@@ -3,7 +3,7 @@
 Welcome to REDO, your one-stop destination for fashion and accessories shopping.
 
 <div align="center" >
-    <img src="https://github.com/AbdelrhmanReda17/CODSOFT/assets/90706154/a12e350b-53aa-4b16-82d5-67b7982ea9fe">
+    <img src="https://github.com/AbdelrhmanReda17/CODSOFT/assets/90706154/51f6f6d1-f263-46e0-b345-6a3fd3f143b3">
 </div>
 
 ## Overview
