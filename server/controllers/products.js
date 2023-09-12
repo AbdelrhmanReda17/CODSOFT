@@ -50,9 +50,9 @@ const getAll = async (type, req, res) => {
       case 'Slatest':
         return { _id: -1 };
       case 'Sprice-hl':
-        return { price: 1 };
-      case 'Sprice-lh':
         return { price: -1 };
+      case 'Sprice-lh':
+        return { price: 1 };
       default:
         return { _id: 1 };
     }
@@ -62,14 +62,18 @@ const getAll = async (type, req, res) => {
     const StartIndex = (Number(page) - 1) * LIMIT;
     
     const TOTAL = await ProductDB.find({
-      department: type === "men" ? "Men's Fashion" : "Women's Fashion",
+      ...(type !== 'all' && {
+        department: type === "men" ? "Men's Fashion" : type === "women" ? "Women's Fashion" : "Accessories Fashion",
+      }),
     });
 
     const ClothingCategory = [" ",...new Set(TOTAL.map((product) => product.category))];
 
-    const products = await ProductDB.find({
-      department: type === "men" ? "Men's Fashion" : "Women's Fashion",
-    }).sort(Sort()).limit(LIMIT).skip(StartIndex);
+      const products = await ProductDB.find({
+        ...(type !== 'all' && {
+          department: type === "men" ? "Men's Fashion" : type === "women" ? "Women's Fashion" : "Accessories Fashion",
+        }),
+      }).sort(Sort()).limit(LIMIT).skip(StartIndex);
 
       const pipeline = [
         {
@@ -86,21 +90,20 @@ const getAll = async (type, req, res) => {
     const BestSelling = await ProductDB.aggregate(pipeline);
 
 
-    var OtherGender;
-    if (type == "women") {
-      OtherGender = await ProductDB.countDocuments({ department: "Men's Fashion" });
-    } else {
-      OtherGender = await ProductDB.countDocuments({ department: "Women's Fashion" });
-    }
+    var numberOfMen , numberOfAccessories , numberOfWomen;
+    numberOfMen = await ProductDB.countDocuments({ department: "Men's Fashion" });
+    numberOfWomen = await ProductDB.countDocuments({ department: "Women's Fashion" });
+    numberOfAccessories = await ProductDB.countDocuments({ department: "Accessories Fashion" });
     res
       .status(200)
       .json({
         data: products,
         currentPage: Number(page),
         numberOfPages: Math.ceil(TOTAL.length / LIMIT),
-        numberOfMen: type === "men" ? TOTAL.length : OtherGender,
-        numberOfWomen: type === "women" ? TOTAL.length : OtherGender,
+        numberOfMen,
+        numberOfWomen,
         numberOfProducts: TOTAL.length,
+        numberOfAccessories,
         BestSelling: BestSelling,
         ClothingCategory:ClothingCategory,
       });
@@ -109,8 +112,9 @@ const getAll = async (type, req, res) => {
   }
 };
 
-const getProductsBySearch = async (req, res) => {
+const getProductsBySearch = async ( type ,req, res) => {
     const { page, search } = req.query;
+    console.log(page , search);
     try {
       const LIMIT = 9;
       const StartIndex = (Number(page) - 1) * LIMIT;
@@ -118,10 +122,16 @@ const getProductsBySearch = async (req, res) => {
       const regexSearch = new RegExp(search, 'i'); 
   
       const TOTAL = await ProductDB.countDocuments({
+        ...(type !== 'all' && {
+          department: type === "men" ? "Men's Fashion" : type === "women" ? "Women's Fashion" : "Accessories Fashion",
+        }),
         name: { $regex: regexSearch }
       });
   
       const products = await ProductDB.find({
+        ...(type !== 'all' && {
+          department: type === "men" ? "Men's Fashion" : type === "women" ? "Women's Fashion" : "Accessories Fashion",
+        }),
         name: { $regex: regexSearch }
       })
         .sort({ _id: -1 })
@@ -148,12 +158,16 @@ const getProductsByCategory = async ( type ,req, res) => {
 
   
       const TOTAL = await ProductDB.countDocuments({
-        department: type === "men" ? "Men's Fashion" : "Women's Fashion",
+        ...(type !== 'all' && {
+          department: type === "men" ? "Men's Fashion" : type === "women" ? "Women's Fashion" : "Accessories Fashion",
+        }),
         category: category
       });
   
       const products = await ProductDB.find({
-        department: type === "men" ? "Men's Fashion" : "Women's Fashion",
+        ...(type !== 'all' && {
+          department: type === "men" ? "Men's Fashion" : type === "women" ? "Women's Fashion" : "Accessories Fashion",
+        }),        
         category: category
       })
         .sort({ _id: -1 })
@@ -212,8 +226,9 @@ const getProductsByPrice = async (type, req, res) => {
     const pipeline = [
       {
         $match: {
-          department: type === "men" ? "Men's Fashion" : "Women's Fashion",
-        },
+          ...(type !== 'all' && {
+            department: type === "men" ? "Men's Fashion" : type === "women" ? "Women's Fashion" : "Accessories Fashion",
+          }),        },
       },
       {
         $addFields: {
@@ -265,26 +280,26 @@ const getProductsByPrice = async (type, req, res) => {
 
 const createProduct = async (req, res) => {
   const product = {
-    name: "Men's Casual Shirt",
-    price: 29.99,
-    description: "A comfortable and stylish shirt for men.",
-    category: "Men's T-Shirt -1",
-    department: "Men's Fashion",
-    imageUrl: "https://johnlewis.scene7.com/is/image/JohnLewis/mw-tshirts-hyb2-260423?$cms-max-image-threshold$&wid=576&fit=hfit,1",
-    stock: 50,
-    discountPercentage: 10,
-    colors: ["blue", "black", "red"],
-    sold: 0, // Corrected property name from "selled" to "sold"
-    AverageRating: 4, // Corrected property name from "AverageRating" to "averageRating"
+    name: "T-Shirt",
+    price: 40,
+    description: "Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit sed.",
+    category: "Women's T-Shirt",
+    department: "Women's Fashion",
+    imageUrl: "https://websitedemos.net/brandstore-02/wp-content/uploads/sites/150/2021/03/tshirt4.jpg",
+    stock: 10,
+    discountPercentage: 7,
+    colors: ["Blue" , "Red" , "Green" , "Orange" , "Pink" , "Purple"],
+    selled: 4,
+    AverageRating: 4,
     reviews: [
       {
-        username: "Abdelrhman",
-        rating: 4, // Corrected rating value from {4} to 4
-        createdAt: "2023-09-09T03:37:18.728+00:00", // You can add the actual date here
+        username: "Mohamed",
+        rating: 4,
+        createdAt: "2023-09-09T03:37:18.728+00:00", 
         comment: "Great Product!",
       },
     ],
-    sizes: ["S", "L", "XL", "M"],
+    sizes: ["S" , "L"],
   };
   
   ;

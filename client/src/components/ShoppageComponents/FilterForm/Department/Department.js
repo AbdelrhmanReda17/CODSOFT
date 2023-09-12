@@ -22,6 +22,10 @@ const Department = () => {
                 <span> Women </span>
                 <span> ({isLoading ? 'Featching...' :numberOfWomen}) </span>
         </ButtonBase>
+        <ButtonBase className='d-flex flex-row justify-content-between mt-2 mb-2 dep-hover' onClick={()=>handleClick("accessories")}>
+                <span> Accessories </span>
+                <span> ({isLoading ? 'Featching...' :numberOfAccessories}) </span>
+        </ButtonBase>
         </div>
     </div>
   )

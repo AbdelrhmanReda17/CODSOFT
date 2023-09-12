@@ -23,9 +23,8 @@ const CustomNavbar = () => {
   const location = useLocation();
 
   const logOut = () => {
-    console.log("ARARARAR");
     dispatch({ type: "LOGOUT" });   
-    navigate("/login");
+    window.location.reload();
     setUser(null);
   };
 
@@ -48,7 +47,6 @@ const CustomNavbar = () => {
       navigate('/shoppingCart/');
       setHasItems(true);
     }else{
-      navigate('/');
       setWrongAccess(true);
     }
   }
@@ -83,6 +81,12 @@ const CustomNavbar = () => {
               HOME
             </Nav.Link>
             <Nav.Link
+              href="/shop/all"
+              className={`nav-item nav-link ${location.pathname.includes('/shop/all') ? 'active' : ''}`}
+            >
+              EVERYTHING
+            </Nav.Link>
+            <Nav.Link
               href="/shop/men"
               className={`nav-item nav-link ${location.pathname.includes('/shop/men') ? 'active' : ''}`}
             >
@@ -94,15 +98,20 @@ const CustomNavbar = () => {
             >
               WOMEN
             </Nav.Link>
+            <Nav.Link
+              href="/shop/accessories"
+              className={`nav-item nav-link ${location.pathname.includes('/shop/accessories') ? 'active' : ''}`}
+            >
+              ACCESSORIES
+            </Nav.Link>
         </Nav>
           <Typography sx={{ mr: 2 }} className="text-coloring">
             <strong>${totalPrice}</strong>
           </Typography>
-          <IconButton aria-label="Shopping-cart">
+          <IconButton aria-label="Shopping-cart" onClick={handleShoppingCart}>
             <Badge
               badgeContent={user?.shoppingCart?.length || 0}
               color="primary"
-              onClick={handleShoppingCart}
             >
               <ShoppingBasketIcon sx={{ fontSize: 25 }} />
             </Badge>
@@ -113,7 +122,7 @@ const CustomNavbar = () => {
             </IconButton>
           ) : (
             <IconButton aria-label="Account" onClick={logOut}>
-              <LogoutIcon sx={{ fontSize: 25 }} />
+              <LogoutIcon sx={{ fontSize: 25 }}  />
             </IconButton>
           )}
         </Navbar.Collapse>
@@ -122,7 +131,8 @@ const CustomNavbar = () => {
           open={!hasItems || wrongAccess}
           autoHideDuration={1400}
           onClose={handleClose}
-          maxSnack={4}
+          TransitionComponent="SlideTransition"
+
         >
           <SnackbarContent
             message={
@@ -141,7 +151,7 @@ const CustomNavbar = () => {
                 <CloseIcon fontSize="small" />
               </IconButton>
             }
-            sx={{ backgroundColor: "rgb(25, 118, 210)" }}
+            sx={{ backgroundColor: "red" }}
           />
         </Snackbar>
     </Container>

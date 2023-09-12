@@ -5,10 +5,10 @@ import { Col, Row } from 'react-bootstrap';
 
 const RelatedProducts = ({ RProducts, openPost }) => {
   return (
-    <Row container xs='auto' className='gap-5 mt-4 align-items-center justify-content-center'>
+    <Row container xs='auto' className='d-flex gap-lg-0 gap-5 mt-4 align-items-center justify-content-center'>
       {RProducts.map(({ name, description, price, AverageRating, imageUrl, _id, discountPercentage }) => (
-        <Col key={_id}>
-          <Card maxWidth={350} cursor={"pointer"} onClick={() => openPost(_id)} elevation={1}>
+        <Col key={_id} sm={12} md={5} lg={3}>
+          <Card style={{marginRight: "10px"}} cursor={"pointer"} onClick={() => openPost(_id)} elevation={1}>
             <CardActionArea>
               <CardMedia
                 component="img"

@@ -19,7 +19,7 @@ const Select = ({page ,type  , setCategory }) => {
       }else{
         setCategory(e.target.value);
         navigate(`/shop/${type}/category`)
-        dispatch(getProductsByCategory(page , type ,e.target.value));
+        dispatch(getProductsByCategory(page , type ,e.target.value  , navigate));
       }
       selectRef.current.value = '';
     }

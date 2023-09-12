@@ -3,6 +3,7 @@ import React from 'react'
 
 // eslint-disable-next-line react/prop-types
 const CustomBreadcrumbs = ({type , name}) => {
+  console.log(type);
   return (
     <Breadcrumbs>
         <Link underline="hover" color="inherit" href="/">
@@ -13,7 +14,7 @@ const CustomBreadcrumbs = ({type , name}) => {
         color="inherit"
         href={`/shop/${type === 'search' ? 'men' : type}`}
         >
-        {type === 'men' ? "Men" : "Women"}
+        {type === 'men' ? "Men" : type === 'women' ?  "Women" : "Accessories"}
         </Link>
         <Typography>{name}</Typography>
     </Breadcrumbs>

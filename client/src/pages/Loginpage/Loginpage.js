@@ -106,7 +106,7 @@ const LoginPage = () => {
                 className="mb-3 w-75"
                 fullWidth
               >
-                Submit
+                Sign in
               </Button>
             </form>
           </Paper>             

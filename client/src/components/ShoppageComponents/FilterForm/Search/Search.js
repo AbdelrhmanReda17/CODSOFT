@@ -19,7 +19,7 @@ const Search = ({page , searchText ,type ,setSearchText  }) => {
       setIsCorrect(true);
     }else{
         Navigate(`/shop/${type}/search`);
-        dispatch(getProductsBySearch(page , searchText));
+        dispatch(getProductsBySearch(page ,type, searchText  , Navigate));
     }
   }
   const handleClose= ()=>{
@@ -44,6 +44,8 @@ const Search = ({page , searchText ,type ,setSearchText  }) => {
       open={isCorrect}
       autoHideDuration={1400}
       onClose={handleClose}
+      TransitionComponent="SlideTransition"
+
     >
       <SnackbarContent
         message={

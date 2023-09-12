@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Paper, Typography, CircularProgress, Divider , Rating , Avatar, IconButton, Snackbar , SnackbarContent,  } from '@mui/material';
+import {Typography, CircularProgress, Divider , Rating , Avatar, IconButton, Snackbar , SnackbarContent,  } from '@mui/material';
 import { getProduct } from '../../actions/products';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row , Col, Image, Container} from 'react-bootstrap'
 import { ColorOptionsSelector, CustomBreadcrumbs , SizeOptionsSelector , QuantityOptionsSelector , Tabs , RelatedProducts as Related , Footer} from '../../components';
 import CloseIcon from '@mui/icons-material/Close';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {addItemToCart} from '../../actions/products'
 import Button from '@mui/joy/Button';
-
+import CheckIcon from '@mui/icons-material/Check';
 import './Productpage.css';
+
+
 const Productpage = () => {
+  
     const { id } = useParams();
-    const { product, products, isLoading , RelatedProducts} = useSelector((state) => state.products);
+    const { product, products, isLoading , RelatedProducts } = useSelector((state) => state.products);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [selectedColor, setSelectedColor] = useState(null);
-    const [selectedSize, setSelectedSize] = useState(null);
-    const [quantity, setQuantity] = useState(1);
+    const [ selectedColor, setSelectedColor ] = useState(null);
+    const [ selectedSize, setSelectedSize ] = useState(null);
+    const [quantity, setQuantity ] = useState(1);
     const [ isAdd , setIsAdd ] = useState(false);
+    const [ isInCart , setIsInCart ] = useState(false);
 
-    const user = JSON.parse(localStorage.getItem('profile'));
+    const user = JSON.parse( localStorage.getItem('profile') );
   
 
     const handleClose = (event, reason) => {
@@ -32,7 +35,7 @@ const Productpage = () => {
     };
 
     useEffect(() => {
-      dispatch(getProduct(id));
+      dispatch(getProduct(id  , navigate));
     }, [id ]);
 
     const handleColorSelection = (color) => {
@@ -62,6 +65,7 @@ const Productpage = () => {
       if (existingCartItem) {
         existingCartItem.quantity += quantity;      
         const Shop = user.shoppingCart.map((cartItem => cartItem.product._id === existingCartItem._id ? existingCartItem : cartItem))
+        setIsInCart(true);
       } else {
         existingCartItem = {
           quantity,
@@ -69,6 +73,7 @@ const Productpage = () => {
           size: selectedSize,
           product: product,
         };
+        setIsInCart(false);
         user.shoppingCart.push(existingCartItem)
       }
       setIsAdd(true);
@@ -78,13 +83,20 @@ const Productpage = () => {
 
   
     if (!product) return null;
-    const type = product.department == "Men's Fashion" ? 'men' : 'women';
+    const type = product.department == "Men's Fashion" ? 'men' : product.department === "Women's Fashion" ? 'women' : "accessories";
 
     if (isLoading) {
       return (
-        <Paper elevation={6} >
-          <CircularProgress size="7em" />
-        </Paper>
+        <>
+        
+        <div className="d-flex text-center align-items-center justify-content-center p-5 BgColor">
+          <Container fluid='xxl' className='justify-content-center align-items-center'>
+            <CircularProgress size="7em" />
+          </Container>
+        </div>         
+         <Footer/>
+        </>
+
       );
     }
   return (
@@ -163,16 +175,14 @@ const Productpage = () => {
           open={isAdd}
           autoHideDuration={1400}
           onClose={handleClose}
-          maxSnack={4}
+          TransitionComponent="SlideTransition"
+
         >
           <SnackbarContent
             message={
               <span style={{ display: "flex", alignItems: "center" }}>
-                <Avatar
-                src={product.imageUrl}
-                sx={{marginLeft: 1 , marginRight: 1}}
-                />
-                {product.name} is successfully added to your cart
+                <CheckIcon  sx={{marginLeft: 1 , marginRight: 1}} size='large'/>
+                {isInCart ? `${product.name} is already in your cart then the quantity is increased by 1` :   ` ${product.name} is successfully added to your cart`}
                 </span>
             }
             action={
@@ -185,7 +195,7 @@ const Productpage = () => {
                 <CloseIcon fontSize="small" />
               </IconButton>
             }
-            sx={{ backgroundColor: "rgb(25, 118, 210)" }}
+            sx={{ backgroundColor: "rgb(25, 118 ,210)"  }}
           />
         </Snackbar>
 

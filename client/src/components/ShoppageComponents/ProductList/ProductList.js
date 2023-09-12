@@ -44,7 +44,7 @@ const ProductList = ({ type , page , setSort , sort}) => {
                 color="inherit"
                 href={`/shop/${type === 'search' ? 'men' : type}`}
               >
-              {type === 'men' ? "Men" : "Women"}
+              {type === 'men' ? "Men" : type=='women' ? "Women" : type == "accessories" ? "Accessories" : "All"}
               </Link>
               <Typography color="text.primary">{data.Filtered ? "Filter Result" : "Search Result"}</Typography>
           </Breadcrumbs>
@@ -53,7 +53,7 @@ const ProductList = ({ type , page , setSort , sort}) => {
               <Link underline="hover" color="inherit" href="/">
                 Home
               </Link>
-              <Typography color="text.primary">{type === 'men' ? "Men" : "Women"}</Typography>
+              <Typography color="text.primary">{type === 'men' ? "Men" : type=='women' ? "Women" : type == "accessories" ? "Accessories" : "All"}</Typography>
             </Breadcrumbs>
           }
         <div>

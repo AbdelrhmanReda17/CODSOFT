@@ -4,3 +4,4 @@ export { default as Productpage } from "./Productpage/Productpage";
 export { default as Loginpage } from "./Loginpage/Loginpage";
 export { default as Registerpage } from "./Registerpage/Registerpage";
 export { default as ShopCartpage } from "./ShopCartpage/ShopCartpage";
+export { default as Errorpage } from "./Errorpage/Errorpage";

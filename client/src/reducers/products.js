@@ -1,4 +1,4 @@
-export default (state = { isLoading: true, Filtered: false, Searched: false, products: [] , product: {} , RelatedProducts :[], numberOfProducts :0, numberOfMen: 0 , numberOfWomen:0 , BestSelling : [] , ClothingCategory : []}, action) => {
+export default (state = { isLoading: true, Filtered: false, Searched: false, products: [] , product: {} , numberOfAccessories:0 , RelatedProducts :[], numberOfProducts :0, numberOfMen: 0 , numberOfWomen:0 , BestSelling : [] , ClothingCategory : []}, action) => {
     switch (action.type) {
       case "START_LOADING":
         return { ...state, isLoading: true };
@@ -20,6 +20,7 @@ export default (state = { isLoading: true, Filtered: false, Searched: false, pro
             BestSelling : action.payload.BestSelling,
             ClothingCategory : action.payload.ClothingCategory,
             numberOfProducts:action.payload.numberOfProducts,
+            numberOfAccessories:action.payload.numberOfAccessories,
             Searched: false,
             Filtered: false
       };

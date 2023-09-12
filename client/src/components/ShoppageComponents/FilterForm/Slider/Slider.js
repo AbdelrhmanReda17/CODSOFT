@@ -11,7 +11,7 @@ const CustomSlider = ({page , type , value1 , setValue1}) => {
     const navigate = useNavigate();
     const handleClick = () => { 
         navigate(`/shop/${type}/price`)
-        dispatch(getProductsByPrice(page , type ,value1));
+        dispatch(getProductsByPrice(page , type ,value1  , navigate));
     };
     function valuetext(value) {
         return `${value}`;
@@ -44,11 +44,11 @@ const CustomSlider = ({page , type , value1 , setValue1}) => {
                 disableSwap
                 max={maxValue}
             />
-                        <div className='d-flex justify-content-space'>
-            <Button variant="primary" id="button-addon2" onClick={handleClick}>
-                Filter
-            </Button>
-             <Typography className='ms-auto' variant='h7' >Price : ${value1[0]} — ${value1[1]}  </Typography>
+            <div className='d-flex justify-content-space'>
+                <Button variant="primary" id="button-addon2" onClick={handleClick}>
+                    Filter
+                </Button>
+                <Typography className='ms-auto' variant='h7' >Price : ${value1[0]} — ${value1[1]}  </Typography>
             </div>
         </div>
     )

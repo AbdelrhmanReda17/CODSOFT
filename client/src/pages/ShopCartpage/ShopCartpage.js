@@ -38,7 +38,7 @@ const ShopCartpage = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
   const [ rows, setRows ] = useState([]);
   const [ isError , setIsError ] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(0.0); // Initialize with 0.0
+  const [totalPrice, setTotalPrice] = useState(0.0);
   const [ isCheckout , setIsCheckout] = useState(false);
   const [ isPayedError, setIsPayedError] = useState(false);
 
@@ -62,7 +62,8 @@ const ShopCartpage = () => {
   }, []);
   useEffect(()=>{
     setTotalPrice(user?.totalPrice || 0.0);
-  },[user]);
+  },[user ]);
+  
   const deleteCartItem = (row) => {
 
       const updatedShoppingCart = user.shoppingCart.filter((item) =>
@@ -241,7 +242,7 @@ const ShopCartpage = () => {
           open={isError || isPayedError}
           autoHideDuration={1800}
           onClose={handleClose}
-          maxSnack={4}
+          TransitionComponent="SlideTransition"
         >
           <SnackbarContent
             message={
@@ -260,7 +261,7 @@ const ShopCartpage = () => {
                 <CloseIcon fontSize="small" />
               </IconButton>
             }
-            sx={{ backgroundColor: "rgb(25, 118, 210)" }}
+            sx={{ backgroundColor: "red" }}
           />
         </Snackbar>
 

@@ -11,6 +11,7 @@ const Mainpage = () => {
     useEffect(()=>{
         dispatch(getFeaturedProducts());
     },[dispatch])
+    
   return (
     <div className='d-flex flex-column align-items-center gap-2'>
         <Row>
