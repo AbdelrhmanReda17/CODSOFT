@@ -1,13 +1,13 @@
 # CODSOFT
 Hello and welcome to my GitHub repository for the CODSOFT internship tasks. I am excited to present my work on two challenging projects that I've completed as part of my internship. Below, you'll find details about each project, the technologies I've used, and where you can access them.
 
-## Project 1: E-Commerce Website
+## [ Project 1: E-Commerce Website](https://github.com/AbdelrhmanReda17/CODSOFT/tree/E-Commerce-Website)
 
 * Description: For my first internship task, I've built a fully functional e-commerce website that allows users to browse products, add items to their shopping cart, and complete the checkout process. It also includes user authentication, robust product filtering, and secure payment integration.
 * Technologies Used: React for the front end, Node.js for the back end, and MongoDB for the database.
 * Code: You can find the code for this project in the E-Commerce-Website folder within this repository.
 
-## Project 2: Project Management Tool
+## [ Project 2: Project Management Tool](https://github.com/AbdelrhmanReda17/CODSOFT/tree/Project-Management-Tool)
 
 * Description: As part of my second internship task, I've developed a project management tool that simplifies project coordination. Users can create projects, assign tasks, set deadlines, and track progress efficiently, enhancing overall project management.
 * Technologies Used: React for the front-end, Node.js for the back-end, and a database, either MongoDB or PostgreSQL.
