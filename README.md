@@ -69,4 +69,4 @@ To run this project locally, follow these simple steps:
 5. Access the website at http://localhost:3000.
 
 ## License
-This project is open-source and is licensed under the MIT License. For detailed licensing information, please refer to the LICENSE file.
+This project is open-source and is licensed under the MIT License.
